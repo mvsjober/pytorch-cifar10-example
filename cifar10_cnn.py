@@ -151,7 +151,7 @@ if __name__ == '__main__':
     parser.add_argument('-n', '--num_workers', type=int, default=4)
     parser.add_argument('-e', '--num_epochs', type=int, default=10)
     parser.add_argument('--print_steps', type=int, default=200)
-    parser.add_argument('--data_path')  # '/scratch/dac/mvsjober/cifar-10-batches-py'
+    parser.add_argument('--data_path')
     parser.add_argument('--model_filename', default='cifar10_model.pth')
     args = parser.parse_args()
 
