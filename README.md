@@ -1,15 +1,10 @@
 # Simple CIFAR10 example in PyTorch
 
-Download [CIFAR10 dataset](https://www.cs.toronto.edu/~kriz/cifar.html), use the [CIFAR-10 python version](https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz). Example:
+This repository contains a simple example of training a Convolutional Neural
+Network (CNN) on the [CIFAR10 image classification
+dataset](https://www.cs.toronto.edu/~kriz/cifar.html). It is used in [CSC's
+"Getting started with machine learning on Puhti"
+guide](https://docs.csc.fi/support/tutorials/ml-starting/).
 
-```bash
-cd /path/to/datadir
-wget https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
-tar xf cifar-10-python.tar.gz
-```
-
-Run on Puhti:
-
-```bash
-sbatch run-test.sh --data_path=/path/to/datadir
-```
+Before running the script you need to download the [CIFAR-10 python
+version of the dataset](https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz).
