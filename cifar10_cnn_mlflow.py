@@ -7,6 +7,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 import mlflow
+import mlflow.pytorch
 
 from PIL import Image
 from torch.utils.data import Dataset
@@ -130,9 +131,16 @@ def main(args):
                 step+=1
                 mlflow.log_metric("loss", l, step=step)
 
-    torch.save(net.state_dict(), args.model_filename)
-    print(f'Saved model to {args.model_filename}')
-    mlflow.log_artifact(args.model_filename)
+    # Save model as artifact
+    # torch.save(net.state_dict(), args.model_filename)
+    # print(f'Saved model to {args.model_filename}')
+    # mlflow.log_artifact(args.model_filename)
+
+    # Save model as mlflow model, note: you probably need to fill in
+    # some more information about the model, see:
+    # https://mlflow.org/docs/latest/python_api/mlflow.pytorch.html#mlflow.pytorch.log_model
+    mlflow.pytorch.log_model(net, "cnn_model")
+    mlflow.pytorch.save_model(net, "cnn_model")
 
     # Test with testset
     correct = 0
@@ -149,8 +157,9 @@ def main(args):
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
 
-    acc = correct // total
-    print(f'Accuracy on testset: {100 * acc} %')
+    print('correct = ', correct, ' total=', total)
+    acc = correct / total
+    print(f'Accuracy on testset: {100 * acc:.2f} %')
     mlflow.log_metric("test_accuracy", acc)
 
 
@@ -162,6 +171,7 @@ if __name__ == '__main__':
     parser.add_argument('--print_steps', type=int, default=200)
     parser.add_argument('--data_path')
     parser.add_argument('--model_filename', default='cifar10_model.pth')
+    args = parser.parse_args()
 
     with mlflow.start_run(run_name=os.getenv("SLURM_JOB_ID")):
         main(args)
