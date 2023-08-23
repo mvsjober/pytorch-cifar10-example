@@ -8,9 +8,3 @@ guide](https://docs.csc.fi/support/tutorials/ml-starting/).
 
 Before running the script you need to download the [CIFAR-10 python
 version of the dataset](https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz).
-
-## Example using MLflow
-
-Take a look at [`cifar10_cnn_mlflow.py`](cifar10_cnn_mlflow.py) and 
-[`run-cifar10-mlflow.sh`](run-cifar10-mlflow.sh) for a modified version that uses 
-[MLflow](https://www.mlflow.org/) for tracking metrics and versioning of models.
